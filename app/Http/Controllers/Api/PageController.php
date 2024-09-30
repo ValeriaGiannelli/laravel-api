@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
     public function index(){
-        $projects = Project::all();
+        $projects = Project::with('technologies', 'type')->get();
+
         if($projects){
             $success = true;
         } else {
