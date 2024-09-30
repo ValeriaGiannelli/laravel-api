@@ -19,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/', [PageController::class, 'index']);
+
+// rotta per i progetti
+Route::get('/progetti', [PageController::class, 'index']);
 
 Route::get('/linguaggi-di-programmazione', [PageController::class, 'technologies'] );
+
+Route::get('/tipi-di-progetto', [PageController::class, 'types']);
