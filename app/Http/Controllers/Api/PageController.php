@@ -54,6 +54,34 @@ class PageController extends Controller
         return response()->json(compact('success', 'types'));
     }
 
+    // pagina del singolo progetto con tecnologie e tipo
+    public function singleProject($slug){
+        $project = Project::where('slug', $slug)->with('type', 'technologies')->first();
+
+        // se il progetto esiste ancora
+        if($project){
+
+            $success = true;
+
+            // se il progetto ha l'immagine modifica il path con asset storage
+            if($project->img_path){
+                $project->img_path = asset('storage/' . $project->img_path);
+            } else {
+
+                // altrimenti assegnaci l'immagine di placheolder
+                $project->img_path = '/img/no_img.jpg';
+                $project->img_original_name = 'placheolder';
+            }
+        }
+
+
+        return response()->json($project);
+
+
+
+    }
+
+
     // prenda tutti i progetti associati a un tipo specifico
     public function projectsByType($slug){
 
