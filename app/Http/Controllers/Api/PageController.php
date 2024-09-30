@@ -72,10 +72,12 @@ class PageController extends Controller
                 $project->img_path = '/img/no_img.jpg';
                 $project->img_original_name = 'placheolder';
             }
+        } else {
+            $success = false;
         }
 
 
-        return response()->json($project);
+        return response()->json(compact('success', 'project'));
 
 
 
@@ -88,13 +90,51 @@ class PageController extends Controller
         $type = Type::where('slug', $slug)->with('projects')->first();
 
         if($type){
+
             $success = true;
+
+            foreach($type->projects as $project){
+                if($project->img_path){
+                    $project->img_path = asset('storage/' . $project->img_path);
+                } else {
+                    $project->img_path = '/img/no_img.jpg';
+                    $project->img_original_name = 'placeholder';
+                }
+            }
+
         } else {
             $success = false;
         }
 
         return response()->json(compact('success', 'type'));
 
+    }
+
+
+    // funzione per tutti i post associati a una tecnologia
+    public function projectsByTechnology($slug){
+
+        $technology = Technology::where('slug', $slug)->with('projects')->first();
+
+        if($technology){
+            $success = true;
+
+            foreach($technology->projects as $project){
+
+                if($project->img_path){
+
+                    $project->img_path = asset('storage/' . $project->img_path);
+                } else {
+                    $project->img_path = '/img/no_img.jpg';
+                    $project->img_original_name = 'placheolder';
+                }
+            }
+
+        } else {
+            $success = false;
+        }
+
+        return response()->json(compact('success', 'technology'));
     }
 
 }

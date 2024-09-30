@@ -30,3 +30,5 @@ Route::get('/tipi-di-progetto', [PageController::class, 'types']);
 Route::get('/progetto/{slug}', [PageController::class, 'singleProject']);
 
 Route::get('/progetti-per-tipo/{slug}', [PageController::class, 'projectsByType']);
+
+Route::get('/progetti-per-tecnologia/{slug}', [PageController::class, 'projectsByTechnology']);
