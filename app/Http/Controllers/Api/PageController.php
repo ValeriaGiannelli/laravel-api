@@ -54,4 +54,19 @@ class PageController extends Controller
         return response()->json(compact('success', 'types'));
     }
 
+    // prenda tutti i progetti associati a un tipo specifico
+    public function projectsByType($slug){
+
+        $type = Type::where('slug', $slug)->with('projects')->first();
+
+        if($type){
+            $success = true;
+        } else {
+            $success = false;
+        }
+
+        return response()->json(compact('success', 'type'));
+
+    }
+
 }

@@ -26,3 +26,5 @@ Route::get('/progetti', [PageController::class, 'index']);
 Route::get('/linguaggi-di-programmazione', [PageController::class, 'technologies'] );
 
 Route::get('/tipi-di-progetto', [PageController::class, 'types']);
+
+Route::get('/progetti-per-tipo/{slug}', [PageController::class, 'projectsByType']);
