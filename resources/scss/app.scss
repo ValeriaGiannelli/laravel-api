@@ -1,0 +1,40 @@
+@import '~bootstrap/scss/bootstrap';
+
+
+.my_side-bar{
+    a {
+        color: white;
+        text-decoration: none;
+        &:hover{
+            text-decoration: underline;
+        }
+    };
+
+    li{
+        list-style:none;
+    }
+};
+
+
+// comprende sia side-bar che parte centrale
+.my_view{
+    width:100%;
+    height: calc(100vh - 40px);
+}
+
+// contenuto visualizzato delle sezioni parte centrale
+.content{
+    overflow: auto;
+    width: calc(100% - 118px);
+}
+
+
+// dimensioni immagini index
+.thumb-mini{
+    width: 50px;
+}
+
+// dimensione img nello show
+.img-show{
+    width:300px;
+}
