@@ -18,6 +18,16 @@ class PageController extends Controller
         // gestione se esistono i progetti
         if($projects){
             $success = true;
+
+            foreach($projects as $project){
+                if($project->img_path){
+                    $project->img_path = asset('storage/' . $project->img_path);
+                } else {
+                    $project->img_path = '/img/no_img.jpg';
+                    $project->img_original_name = 'placeholder';
+                }
+            }
+
         } else {
             $success = false;
         }
