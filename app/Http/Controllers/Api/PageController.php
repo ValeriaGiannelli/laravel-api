@@ -7,13 +7,14 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PageController extends Controller
 {
 
     // mi prende i progetti e le technologie e tipi associati
     public function index(){
-        $projects = Project::with('technologies', 'type')->paginate(10);
+        $projects = Project::orderBy('id', 'desc')->with('technologies', 'type')->paginate(10);
 
         // gestione se esistono i progetti
         if($projects){
@@ -75,11 +76,11 @@ class PageController extends Controller
 
             // se il progetto ha l'immagine modifica il path con asset storage
             if($project->img_path){
-                $project->img_path = asset('storage/' . $project->img_path);
+                $project->img_path = Storage::url($project->img_path);
             } else {
 
                 // altrimenti assegnaci l'immagine di placheolder
-                $project->img_path = '/img/no_img.jpg';
+                $project->img_path = Storage::url('/uploads/no_img.jpg');
                 $project->img_original_name = 'placheolder';
             }
         } else {
