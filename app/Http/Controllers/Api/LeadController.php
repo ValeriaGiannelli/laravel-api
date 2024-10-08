@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NewContact;
+use App\Models\lead;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class LeadController extends Controller
 {
@@ -17,7 +20,7 @@ class LeadController extends Controller
         [
             'name' => 'required|string|max:100',
             'email' => 'required|email|max:100',
-            'message' => 'required|string|min:100',
+            'message' => 'required|string|min:10',
         ],
         [
             'name.required' => 'il campo è obbligatorio',
@@ -37,6 +40,14 @@ class LeadController extends Controller
         $errors = $validator->errors();
         return response()->json(compact('success', 'errors'));
     }
-        return response()->json(compact('data','success'));
+
+    // salvare il messaggio nel DB
+    $new_lead = new lead();
+    $new_lead->fill($data);
+    $new_lead->save();
+
+    // inviare la mail
+    Mail::to($new_lead->email)->send(new NewContact($new_lead));
+        return response()->json(compact('success'));
     }
 }

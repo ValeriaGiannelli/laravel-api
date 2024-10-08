@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class lead extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name', 'email', 'message'
+    ];
 }
