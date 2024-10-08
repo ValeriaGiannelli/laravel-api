@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\LeadController;
 use App\Http\Controllers\Api\PageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,3 +33,5 @@ Route::get('/progetto/{slug}', [PageController::class, 'singleProject']);
 Route::get('/progetti-per-tipo/{slug}', [PageController::class, 'projectsByType']);
 
 Route::get('/progetti-per-tecnologia/{slug}', [PageController::class, 'projectsByTechnology']);
+
+Route::post('/send-email', [LeadController::class, 'store']);
