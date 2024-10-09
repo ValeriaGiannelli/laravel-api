@@ -19,9 +19,3 @@ creare il database e fare le migrazioni e i seed
 php artisan serve
 npm run dev
 ```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
