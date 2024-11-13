@@ -48,6 +48,6 @@ class LeadController extends Controller
 
     // inviare la mail
     Mail::to($new_lead->email)->send(new NewContact($new_lead));
-        return response()->json(compact('success'));
+        return response()->json(compact('success', 'data'));
     }
 }
